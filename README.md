@@ -30,5 +30,8 @@
     ```
     podman build . --target processing --tag shelf-container-processing
     ```
-2.  ???
-3.  Profit!
+2.  Run the image, with:
+    ```
+    podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t localhost/cshelf-run
+    ```
+3.  Examine the resulting notebook and outfile, written to `$(pwd)`
