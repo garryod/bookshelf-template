@@ -15,16 +15,16 @@ Simply "create a release" on github, this will generate
 ### Interactive (local)
 
 ```
-podman run -p 8888:8888 ghcr.io/garryod/bookshelf-template
+podman run -p 8888:8888 ghcr.io/garryod/bookshelf-template/interactive:latest
 ```
 
 ### Interactive (hosted)
 
 1.  Go to https://jupyterhub.diamond.ac.uk/hub/home
-2.  'Start My Server' with `CONTAINER_IMAGE=ghcr.io/garryod/bookshelf-template
+2.  'Start My Server' with `CONTAINER_IMAGE=ghcr.io/garryod/bookshelf-template/interactive:latest
 
 ### Processing
 
 ```
-podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t ghcr.io/garryod/bookshelf-template
+podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t ghcr.io/garryod/bookshelf-template/processing:latest
 ```
