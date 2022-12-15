@@ -21,7 +21,7 @@ podman run -p 8888:8888 ghcr.io/garryod/bookshelf-template/interactive:latest
 ### Interactive (hosted)
 
 1.  Go to https://jupyterhub.diamond.ac.uk/hub/home
-2.  'Start My Server' with `CONTAINER_IMAGE=ghcr.io/garryod/bookshelf-template/interactive:latest
+2.  'Start My Server' with `CONTAINER_IMAGE=ghcr.io/garryod/bookshelf-template/interactive:latest`
 
 ### Processing
 
