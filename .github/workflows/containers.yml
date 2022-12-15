@@ -25,7 +25,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Generate Image Name
-        run: echo IMAGE_REPOSITORY=ghcr.io/$(tr '[:upper:]' '[:lower:]' <<< "${{ github.repository }}")/${{ matrix.target }} >> $GITHUB_ENV
+        run: |
+          REPO_OWNER=$(tr '[:upper:]' '[:lower:]' <<< "${{ github.repository_owner }}")
+          REPO_NAME=$(tr '[:upper:]' '[:lower:]' <<< "${{ github.event.repository.name }}")
+          TARGET=$(tr '[:upper:]' '[:lower:]' <<< "${{ matrix.target }}")
+          echo IMAGE_REPOSITORY=ghcr.io/$REPO_OWNER/bookshelf/$REPO_NAME/$TARGET >> $GITHUB_ENV
 
       - name: Log in to GitHub Docker Registry
         if: github.event_name != 'pull_request'
