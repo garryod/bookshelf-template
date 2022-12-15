@@ -1,37 +1,30 @@
-# Using Containerized Shelf Notebooks
+# Bookshelf Notebooks
 
-## Interactive (local)
+## Setting up your bookshelf
 
-1.  Build & tag the image, with:
-    ```
-    podman build . --target interactive --tag shelf-container-interactive
-    ```
-2.  Run the image, with:
-    ```
-    podman run -p 8888:8888 shelf-container-interactive
-    ```
+1. Add your Python requirements are to the `project.dependencies` section within the `pyproject.toml`.
+2. Fill in `notebook.ipynb` with whatever processing you wish to perform.
+3. Update your readme to describe what your bookshelf does.
 
-## Interactive (hosted)
+## Releasing a version
 
-1.  Build & publish the image
-    ```
-    podman build . --target interactive --tag gcr.io/diamond-pubreg/shelf/container/interactive
-    podman push -p 8888:8888 gcr.io/diamond-pubreg/shelf/container/interactive
-    ```
-2.  Go to https://jupyterhub.diamond.ac.uk/hub/home
-3.  'Start My Server' with:
-    ```
-    CONTAINER_IMAGE=gcr.io/diamond-pubreg/shelf/container/interactive
-    ```
+Simply "create a release" on github, this will generate 
 
-## Processing 
+## Running the Containers
 
-1.  Build & tag the image, with
-    ```
-    podman build . --target processing --tag shelf-container-processing
-    ```
-2.  Run the image, with:
-    ```
-    podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t localhost/cshelf-run
-    ```
-3.  Examine the resulting notebook and outfile, written to `$(pwd)`
+### Interactive (local)
+
+```
+podman run -p 8888:8888 ghcr.io/garryod/bookshelf-template
+```
+
+### Interactive (hosted)
+
+1.  Go to https://jupyterhub.diamond.ac.uk/hub/home
+2.  'Start My Server' with `CONTAINER_IMAGE=ghcr.io/garryod/bookshelf-template
+
+### Processing
+
+```
+podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t ghcr.io/garryod/bookshelf-template
+```
