@@ -9,6 +9,11 @@ on:
 
 jobs:
   build_push:
+    strategy:
+      fail-fast: true
+      matrix:
+        target: ["interactive", "processing"]
+
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,8 +24,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Generate Image Repo name
-        run: echo IMAGE_REPOSITORY=ghcr.io/$(tr '[:upper:]' '[:lower:]' <<< "${{ github.repository }}") >> $GITHUB_ENV
+      - name: Generate Image Name
+        run: echo IMAGE_REPOSITORY=ghcr.io/$(tr '[:upper:]' '[:lower:]' <<< "${{ github.repository }}")/${{ matrix.target }} >> $GITHUB_ENV
 
       - name: Log in to GitHub Docker Registry
         if: github.event_name != 'pull_request'
@@ -43,19 +48,10 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build Interactive Image
+      - name: Build Image
         uses: docker/build-push-action@v3
         with:
-          target: interactive
-          push: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
-          load: ${{ ! (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build Processing Image
-        uses: docker/build-push-action@v3
-        with:
-          target: processing
+          target: ${{ matrix.target }}
           push: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
           load: ${{ ! (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) }}
           tags: ${{ steps.meta.outputs.tags }}
