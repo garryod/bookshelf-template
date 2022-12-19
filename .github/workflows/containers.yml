@@ -43,6 +43,9 @@ jobs:
           tags: |
             type=ref,event=tag
             type=raw,value=latest
+          labels: |
+            uk.ac.diamond.bookshelf.name=${{ github.event.repository.name }}
+            uk.ac.diamond.bookshelf.type=${{ matrix.target }}
 
       - name: Set up Docker Buildx
         id: buildx
