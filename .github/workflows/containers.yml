@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        target: ["interactive", "processing"]
+        target: ["interactive", "processing", "service"]
 
     runs-on: ubuntu-latest
 
