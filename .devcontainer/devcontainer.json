@@ -1,11 +1,7 @@
 // For format details, see https://containers.dev/implementors/json_reference/
 {
 	"name": "Python 3 Developer Container",
-	"build": {
-		"dockerfile": "../Dockerfile",
-		"context": "..",
-		"target": "develop"
-	},
+	"image": "python:3.10",
 	"remoteEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}"
 	},
@@ -44,5 +40,6 @@
 	],
 	// make the workspace folder the same inside and outside of the container
 	"workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
-	"workspaceFolder": "${localWorkspaceFolder}"
+	"workspaceFolder": "${localWorkspaceFolder}",
+	"postCreateCommand": "pip install -e .[interactive,processing,service]"
 }
