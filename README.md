@@ -24,7 +24,7 @@ This will query the GitHub API and catalogue all containers in the DiamondLightS
 ### Interactive (local)
 
 ```
-podman run -p 8888:8888 ghcr.io/garryod/bookshelf-template/interactive:latest
+podman container runlabel uk.ac.diamond.bookshelf.runlabel ghcr.io/garryod/bookshelf-template/interactive:latest
 ```
 or
 ```
@@ -41,7 +41,7 @@ bookshelf-template-interactive
 ### Processing
 
 ```
-podman run -v $(pwd):/outputs -v $(pwd):/inputs --security-opt=label=type:container_runtime_t ghcr.io/garryod/bookshelf-template/processing:latest
+podman container runlabel uk.ac.diamond.bookshelf.runlabel ghcr.io/garryod/bookshelf-template/processing:latest
 ```
 or
 ```
@@ -52,5 +52,5 @@ bookshelf-template-processing
 ### Service (local)
 
 ```
-podman run -p 8000:8000 ghcr.io/garryod/bookshelf-template/service:latest
+podman container runlabel uk.ac.diamond.bookshelf.runlabel ghcr.io/garryod/bookshelf-template/service:latest
 ```
