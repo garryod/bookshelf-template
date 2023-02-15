@@ -1,10 +1,9 @@
 # Bookshelf Notebooks
 
-This template can be used to develop container images with data processing notebooks which will be automatically deployed in three varieties:
+This template can be used to develop container images with data processing notebooks which will be automatically deployed in two varieties:
 
 1. An interactive - jupyterlab - environment, for running both locally and on the hosted JupyterLab instance
 2. A headless processing image, for running both locally and as a cluster job
-3. A service, which can be hosted on the k8s cluster, and accessed via a REST API
 
 ## Setting up your bookshelf
 
@@ -46,10 +45,4 @@ or
 ```
 module load bookshelf/bookshelf-template/latest
 bookshelf-template-processing
-```
-
-### Service (local)
-
-```
-podman run --publish 8000:8000 ghcr.io/diamondlightsource/bookshelf-template/service:latest
 ```
